@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import logoImage from "@/assets/hex-logo.jpg";
+import logoImage from "@/assets/hex-logo.png";
 
 export function Preloader() {
   const [done, setDone] = useState(false);
@@ -8,7 +8,6 @@ export function Preloader() {
     const t = setTimeout(() => setDone(true), 1750);
     return () => clearTimeout(t);
   }, []);
-  const letters = ["H", "E", "X"];
   return (
     <AnimatePresence>
       {!done && (
@@ -18,29 +17,14 @@ export function Preloader() {
           initial={{ opacity: 1 }}
           exit={{ y: "-100%", transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] } }}
         >
-          <div className="flex items-baseline gap-1 text-display text-[22vw] sm:text-[16vw] leading-none">
-            {letters.map((l, i) => (
-              <motion.span
-                key={l}
-                initial={{ y: "100%", opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.15 + i * 0.1, duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
-                className="inline-block"
-                style={{
-                  clipPath: i === 1 ? "polygon(0 0, 100% 0, 100% 82%, 82% 100%, 0 100%)" : undefined,
-                  backgroundImage: `url(${logoImage})`,
-                  backgroundSize: "300% 100%",
-                  backgroundPosition: `${i * 50}% center`,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                {l}
-              </motion.span>
-            ))}
-          </div>
+          <motion.img
+            src={logoImage}
+            alt="Hex Store"
+            className="w-[62vw] max-w-sm sm:w-[38vw]"
+            initial={{ opacity: 0, scale: 0.94, y: 14 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
+          />
           <motion.div
             className="mt-6 h-[3px] w-[min(70vw,520px)] bg-[#000] origin-left"
             initial={{ scaleX: 0 }}
@@ -59,3 +43,4 @@ export function Preloader() {
     </AnimatePresence>
   );
 }
+
