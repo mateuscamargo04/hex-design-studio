@@ -1,31 +1,13 @@
-import logoImage from "@/assets/hex-logo.jpg";
+import logoImage from "@/assets/hex-logo.png";
 
-// Wordmark for Hex Store. HEX é renderizado com a imagem preenchendo as letras
-// (background-clip: text). Troque `src/assets/hex-logo.jpg` para mudar a arte.
+// Wordmark for Hex Store — renderiza a arte final do logo diretamente.
+// Troque `src/assets/hex-logo.png` para atualizar a arte em todo o site.
 export function HexLogo({ className = "", size = "sm" }: { className?: string; size?: "sm" | "lg" }) {
-  const fontSize = size === "lg" ? "clamp(4rem, 16vw, 12rem)" : "1.5rem";
+  const heightClass = size === "lg" ? "h-20 sm:h-28 lg:h-36" : "h-7 sm:h-8";
   return (
-    <span className={`inline-flex items-center gap-3 select-none ${className}`}>
-      <span
-        aria-label="HEX"
-        className="text-display leading-none tracking-tight"
-        style={{
-          fontSize,
-          display: "inline-block",
-          paddingRight: "0.15em",
-          clipPath: "polygon(0 0, 100% 0, 100% 78%, 88% 100%, 0 100%)",
-          backgroundImage: `url(${logoImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          WebkitBackgroundClip: "text",
-          backgroundClip: "text",
-          color: "transparent",
-          WebkitTextFillColor: "transparent",
-        }}
-      >
-        HEX
-      </span>
-      {size === "sm" && <span className="text-eyebrow text-muted-foreground">— STORE —</span>}
+    <span className={`inline-flex items-center select-none ${className}`}>
+      <img src={logoImage} alt="Hex Store" className={`${heightClass} w-auto object-contain`} />
     </span>
   );
 }
+
