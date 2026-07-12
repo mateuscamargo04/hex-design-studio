@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import logoImage from "@/assets/hex-logo.jpg";
 
 export function Preloader() {
   const [done, setDone] = useState(false);
@@ -13,7 +14,7 @@ export function Preloader() {
       {!done && (
         <motion.div
           key="preloader"
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-paper"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-paper"
           initial={{ opacity: 1 }}
           exit={{ y: "-100%", transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] } }}
         >
@@ -25,12 +26,27 @@ export function Preloader() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.15 + i * 0.1, duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
                 className="inline-block"
-                style={{ clipPath: i === 1 ? "polygon(0 0, 100% 0, 100% 82%, 82% 100%, 0 100%)" : undefined }}
+                style={{
+                  clipPath: i === 1 ? "polygon(0 0, 100% 0, 100% 82%, 82% 100%, 0 100%)" : undefined,
+                  backgroundImage: `url(${logoImage})`,
+                  backgroundSize: "300% 100%",
+                  backgroundPosition: `${i * 50}% center`,
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  WebkitTextFillColor: "transparent",
+                }}
               >
                 {l}
               </motion.span>
             ))}
           </div>
+          <motion.div
+            className="mt-6 h-[3px] w-[min(70vw,520px)] bg-[#000] origin-left"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.45, duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
+          />
           <motion.div
             className="absolute bottom-8 left-8 right-8 h-px bg-line origin-left"
             initial={{ scaleX: 0 }}
