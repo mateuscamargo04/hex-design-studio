@@ -2,9 +2,13 @@ import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { useLightMode, useHydrated } from "./use-light-mode";
 import { Hex2DFallback } from "./Hex2DFallback";
+import { Spotlight } from "@/components/ui/spotlight";
+import { HERO_SPLINE_SCENE } from "@/config/spline";
 import { ArrowDown } from "lucide-react";
 
-const HexScene = lazy(() => import("./HexScene"));
+const SplineScene = lazy(() =>
+  import("@/components/ui/spline-scene").then((m) => ({ default: m.SplineScene })),
+);
 
 const words = ["Sites.", "Identidade.", "Scripts.", "Precisão."];
 
@@ -15,16 +19,24 @@ export function Hero() {
 
   return (
     <section id="top" className="relative isolate min-h-[100svh] overflow-hidden bg-paper">
-      {/* backdrop scene */}
+      {/* backdrop: Spline 3D com Spotlight por cima, fallback 2D leve no mobile */}
       <div className="pointer-events-none absolute inset-0">
         {use3D ? (
-          <Suspense fallback={<Hex2DFallback />}>
-            <HexScene />
-          </Suspense>
+          <>
+            <div className="absolute inset-0 [&>*]:!h-full [&>*]:!w-full">
+              <Suspense fallback={<Hex2DFallback />}>
+                <SplineScene scene={HERO_SPLINE_SCENE} className="!h-full !w-full" />
+              </Suspense>
+            </div>
+            <Spotlight
+              className="-top-40 left-0 md:-top-20 md:left-60"
+              fill="rgba(29,29,31,0.45)"
+            />
+          </>
         ) : (
           <Hex2DFallback />
         )}
-        <div className="absolute inset-0 bg-gradient-to-b from-paper/40 via-transparent to-paper/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-paper/50 via-transparent to-paper/70" />
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-between px-6 pb-16 pt-32 sm:pt-40">
@@ -57,8 +69,8 @@ export function Hero() {
             transition={{ delay: 2.45, duration: 0.7 }}
             className="mt-8 max-w-xl text-base sm:text-lg text-muted-foreground"
           >
-            Estúdio dedicado a donos de cidade GTA RP e criadores Roblox.
-            Sites, banners, identidade, Discord e scripts — em uma só linguagem visual.
+            Estúdio dedicado a donos de cidade GTA RP e criadores Roblox. Sites, banners,
+            identidade, Discord e scripts — em uma só linguagem visual.
           </motion.p>
           <motion.div
             initial={{ y: 20, opacity: 0 }}
@@ -66,8 +78,12 @@ export function Hero() {
             transition={{ delay: 2.6, duration: 0.7 }}
             className="mt-10 flex flex-wrap gap-3"
           >
-            <a href="#orcamento" data-magnet className="btn-pill btn-primary">Começar um projeto</a>
-            <a href="#servicos" className="btn-pill btn-ghost">Ver serviços</a>
+            <a href="#orcamento" data-magnet className="btn-pill btn-primary">
+              Começar um projeto
+            </a>
+            <a href="#servicos" className="btn-pill btn-ghost">
+              Ver serviços
+            </a>
           </motion.div>
         </div>
 
