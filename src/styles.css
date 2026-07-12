@@ -70,7 +70,6 @@
   letter-spacing: -0.035em;
   line-height: 0.92;
   font-weight: 500;
-  color: black;
 }
 @utility text-eyebrow {
   font-family: var(--font-mono);
