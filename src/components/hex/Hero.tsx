@@ -15,7 +15,7 @@ const words = ["Sites.", "Identidade.", "Scripts.", "Precisão."];
 export function Hero() {
   const light = useLightMode();
   const hydrated = useHydrated();
-  const use3D = hydrated && !light;
+  const use3D = false;
 
   return (
     <section id="top" className="relative isolate min-h-[100svh] overflow-hidden bg-paper">
