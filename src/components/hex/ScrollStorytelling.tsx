@@ -33,16 +33,14 @@ function Chapter({
   onEnter: () => void;
   activeIndex: number;
 }) {
-  const opacity = useTransform(
-    progress,
-    [
-      (index - 0.5) / total,
-      index / total + 0.02,
-      (index + 1) / total - 0.02,
-      (index + 1.5) / total,
-    ],
-    [0, 1, 1, 0],
-  );
+  const clamp = (v: number) => Math.max(0, Math.min(1, v));
+  const a = clamp((index - 0.5) / total);
+  const b = clamp(index / total + 0.02);
+  const c = clamp((index + 1) / total - 0.02);
+  const d = clamp((index + 1.5) / total);
+  // Ensure strictly non-decreasing sequence for framer-motion offsets
+  const stops = [a, Math.max(a, b), Math.max(a, b, c), Math.max(a, b, c, d)];
+  const opacity = useTransform(progress, stops, [0, 1, 1, 0]);
   return (
     <motion.div
       className="absolute inset-0"
