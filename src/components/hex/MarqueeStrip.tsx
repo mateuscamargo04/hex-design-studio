@@ -62,14 +62,12 @@ export function MarqueeStrip() {
         dragElastic={0.02}
         dragMomentum
         style={{ x, opacity }}
-        className="flex cursor-grab select-none py-6 sm:py-8 active:cursor-grabbing"
+        className="flex cursor-grab select-none py-3 sm:py-4 active:cursor-grabbing"
       >
         {[...brands, ...brands, ...brands, ...brands].map((b, i) => (
-          <div key={i} className="flex shrink-0 items-center gap-8 pr-8">
-            <span className="text-display text-3xl sm:text-5xl leading-none">{b}</span>
-            <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden className="opacity-40">
-              <polygon points="14,3 25,9 25,19 14,25 3,19 3,9" fill="none" stroke="currentColor" strokeWidth="1" />
-            </svg>
+          <div key={i} className="flex shrink-0 items-center gap-6 pr-6">
+            <span className="text-display text-xl sm:text-2xl leading-none">{b}</span>
+            <span aria-hidden className="inline-block h-1 w-1 rounded-full bg-ink/40" />
           </div>
         ))}
       </motion.div>
