@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { HexLogo } from "./HexLogo";
 
@@ -13,33 +13,12 @@ const links = [
 export function Header() {
   const [shrink, setShrink] = useState(false);
   const [open, setOpen] = useState(false);
-  const btnRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     const onScroll = () => setShrink(window.scrollY > 32);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // magnetic effect for CTA
-  useEffect(() => {
-    const b = btnRef.current; if (!b) return;
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-    const onMove = (e: MouseEvent) => {
-      const r = b.getBoundingClientRect();
-      const cx = r.left + r.width / 2;
-      const cy = r.top + r.height / 2;
-      const dx = e.clientX - cx; const dy = e.clientY - cy;
-      const dist = Math.hypot(dx, dy);
-      if (dist < 130) {
-        b.style.transform = `translate(${dx * 0.18}px, ${dy * 0.25}px)`;
-      } else {
-        b.style.transform = "";
-      }
-    };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
   }, []);
 
   return (
@@ -61,7 +40,7 @@ export function Header() {
             </a>
           ))}
         </nav>
-        <a ref={btnRef} data-magnet href="#orcamento" className="btn-pill btn-primary hidden md:inline-flex" style={{ transition: "transform 260ms cubic-bezier(0.2,0.8,0.2,1), background 200ms, color 200ms" }}>
+        <a href="#orcamento" className="btn-pill btn-primary hidden md:inline-flex">
           Fazer orçamento
         </a>
         <button
