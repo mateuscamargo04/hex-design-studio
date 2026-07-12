@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Instagram } from "lucide-react";
 
-// TODO: substitute NUMERO and DISCORD_LINK placeholders below.
-const WA_NUMBER = "SEUNUMEROAQUI";
-const DISCORD_URL = "SEULINKDODISCORDAQUI";
+const WA_NUMBER = "5516993099045";
+const DISCORD_URL = "https://discord.gg/Ds4J7wDmW";
+const INSTAGRAM_URL = "https://instagram.com/mateusdevlp";
 
 const tipos = [
   "Site",
@@ -48,14 +49,25 @@ export function ContactForm() {
           <p className="mt-6 max-w-sm text-sm text-paper/70">
             Formulário monta a mensagem no WhatsApp já preenchida. Prefere Discord? Botão logo abaixo.
           </p>
-          <a
-            href={DISCORD_URL === "SEULINKDODISCORDAQUI" ? "#" : DISCORD_URL}
-            target="_blank"
-            rel="noopener"
-            className="btn-pill btn-ghost mt-8 border-paper/40 text-paper hover:bg-paper hover:text-ink"
-          >
-            Entrar no Discord →
-          </a>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a
+              href={DISCORD_URL}
+              target="_blank"
+              rel="noopener"
+              className="btn-pill btn-ghost border-paper/40 text-paper hover:bg-paper hover:text-ink"
+            >
+              Entrar no Discord →
+            </a>
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener"
+              aria-label="Instagram"
+              className="btn-pill btn-ghost border-paper/40 text-paper hover:bg-paper hover:text-ink inline-flex items-center gap-2"
+            >
+              <Instagram size={16} /> Instagram
+            </a>
+          </div>
         </div>
 
         <form onSubmit={submit} className="grid gap-5">
@@ -105,9 +117,6 @@ export function ContactForm() {
             <button type="submit" className="btn-pill bg-paper text-ink hover:bg-paper-alt">
               Enviar pelo WhatsApp
             </button>
-            <span className="text-xs text-paper/50">
-              Substitua {`{{NUMERO}}`} e {`{{DISCORD}}`} nos placeholders do código.
-            </span>
           </div>
         </form>
       </div>
