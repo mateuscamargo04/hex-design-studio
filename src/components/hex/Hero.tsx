@@ -49,7 +49,7 @@ export function Hero() {
           >
             HEX STORE — Estúdio técnico
           </motion.div>
-          <h1 className="text-display mt-6 text-[15vw] sm:text-[10vw] lg:text-[9rem] font-semibold" style={{ color: "#000", textShadow: "0 1px 0 rgba(255,255,255,0.4)" }}>
+          <h1 className="text-display mt-6 text-[15vw] sm:text-[10vw] lg:text-[9rem] font-semibold" style={{ color: "#fff", mixBlendMode: "difference" }}>
             {words.map((w, i) => (
               <span key={w} className="mr-4 inline-block overflow-hidden align-bottom">
                 <motion.span
