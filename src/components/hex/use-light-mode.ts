@@ -6,10 +6,8 @@ export function useLightMode() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const narrow = window.matchMedia("(max-width: 768px)").matches;
-    const cores = navigator.hardwareConcurrency ?? 4;
     const coarse = window.matchMedia("(pointer: coarse)").matches;
-    const shouldLight = reduce || narrow || coarse || cores <= 4;
-    setLight(shouldLight);
+    setLight(reduce || narrow || coarse);
   }, []);
   return light;
 }
