@@ -25,7 +25,7 @@ export function Hero() {
           <>
             <div className="absolute inset-0 [&>*]:!h-full [&>*]:!w-full">
               <Suspense fallback={<Hex2DFallback />}>
-                <SplineScene scene={HERO_SPLINE_SCENE} className="!h-full !w-full" />
+                <SplineScene scene={HERO_SPLINE_SCENE} className="!h-full !w-full" fallback={<Hex2DFallback />} />
               </Suspense>
             </div>
             <Spotlight
