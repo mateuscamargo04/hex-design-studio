@@ -1,14 +1,9 @@
-import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { useLightMode, useHydrated } from "./use-light-mode";
 import { Hex2DFallback } from "./Hex2DFallback";
 import { Spotlight } from "@/components/ui/spotlight";
-import { HERO_SPLINE_SCENE } from "@/config/spline";
+import { HERO_SPLINE_EMBED } from "@/config/spline";
 import { ArrowDown } from "lucide-react";
-
-const SplineScene = lazy(() =>
-  import("@/components/ui/spline-scene").then((m) => ({ default: m.SplineScene })),
-);
 
 const words = ["Sites.", "Identidade.", "Scripts.", "Precisão."];
 
@@ -19,15 +14,17 @@ export function Hero() {
 
   return (
     <section id="top" className="relative isolate min-h-[100svh] overflow-hidden bg-paper">
-      {/* backdrop: Spline 3D com Spotlight por cima, fallback 2D leve no mobile */}
+      {/* backdrop: robô 3D via embed do Spline (iframe isolado, evita WebGL no doc principal) */}
       <div className="pointer-events-none absolute inset-0">
         {use3D ? (
           <>
-            <div className="absolute inset-0 [&>*]:!h-full [&>*]:!w-full">
-              <Suspense fallback={<Hex2DFallback />}>
-                <SplineScene scene={HERO_SPLINE_SCENE} className="!h-full !w-full" fallback={<Hex2DFallback />} />
-              </Suspense>
-            </div>
+            <iframe
+              src={HERO_SPLINE_EMBED}
+              title="Hex Store — robô 3D"
+              loading="lazy"
+              className="pointer-events-auto absolute inset-0 h-full w-full border-0"
+              allow="autoplay; fullscreen; xr-spatial-tracking"
+            />
             <Spotlight
               className="-top-40 left-0 md:-top-20 md:left-60"
               fill="rgba(29,29,31,0.45)"
@@ -38,6 +35,7 @@ export function Hero() {
         )}
         <div className="absolute inset-0 bg-gradient-to-b from-paper/50 via-transparent to-paper/70" />
       </div>
+
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-between px-6 pb-16 pt-32 sm:pt-40">
         <div>
